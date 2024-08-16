@@ -5,9 +5,13 @@ services:
     # privileged: true
     restart: unless-stopped
     image: {{ frigate_container_image }}
+    cap_add:
+      - CAP_PERFMON
     shm_size: "256mb"
     devices:
       - /dev/bus/usb:/dev/bus/usb # passes the USB Coral
+      # Intel QuickSync
+      - /dev/dri/renderD128:/dev/dri/renderD128
 {% if frigate_hwaccel_args == "preset-rpi-64-h264" %}
       - /dev/video10:/dev/video10
 {% endif %}
@@ -24,7 +28,12 @@ services:
       - "5000:5000"
       - "1935:1935" # RTMP feeds
     environment:
-      FRIGATE_RTSP_PASSWORD: "{{ frigate_rtsp_password }}"
+      # TODO: make a list & loop over indices
+      FRIGATE_RTSP_PASSWORD0: "{{ frigate_rtsp_password0 }}"
+      FRIGATE_RTSP_PASSWORD1: "{{ frigate_rtsp_password1 }}"
+      FRIGATE_RTSP_PASSWORD2: "{{ frigate_rtsp_password2 }}"
+      FRIGATE_RTSP_PASSWORD3: "{{ frigate_rtsp_password3 }}"
+      FRIGATE_VIVINT_USER: "user"
 {% if frigate_configure_mqtt_broker %}
 
   mqtt:
