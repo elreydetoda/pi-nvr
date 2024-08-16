@@ -1,5 +1,5 @@
 ---
-- hosts: dvr
+- hosts: all
   become: true
 
   handlers:
