@@ -7,6 +7,10 @@ collections:
     version: 3.12.1
     source: https://github.com/ansible-collections/community.docker.git
     type: git
+  - name: community.docker
+    version: 12.2.0
+    source: https://github.com/ansible-collections/community.general.git
+    type: git
 # ansible-galaxy role install --force -r requirements.yml
 roles:
   - name: geerlingguy.docker
