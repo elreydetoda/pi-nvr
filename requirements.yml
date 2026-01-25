@@ -1,4 +1,15 @@
 ---
-# ansible-galaxy install --force -r requirements.yml
+# ansible-galaxy collection install --force -r requirements.yml
+# received the following error, so switch to git version:
+# [ERROR]: Error when getting collection version metadata for community.docker:3.12.1 from default (https://galaxy.ansible.com/api/) (HTTP Code: 500, Message: Internal Server Error Code: Unknown)
+collections:
+  - name: community.docker
+    version: 3.12.1
+    source: https://github.com/ansible-collections/community.docker.git
+    type: git
+# ansible-galaxy role install --force -r requirements.yml
 roles:
-  - src: geerlingguy.docker
+  - name: geerlingguy.docker
+    src: https://github.com/geerlingguy/ansible-role-docker.git
+    version: 8.0.0
+    scm: git
